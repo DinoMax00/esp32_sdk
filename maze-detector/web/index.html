@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#35dc83">
+  <title>铁丝迷宫 · 接触检测</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body { background: #35dc83; color: #073d24; }
+    #screen { min-height: 100svh; display: flex; flex-direction: column; padding: clamp(24px, 5vw, 64px); background: #35dc83; }
+    header, footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    header { font-size: 15px; font-weight: 500; }
+    .connection { display: flex; align-items: center; gap: 8px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 72px 0; }
+    .label { margin: 0 0 24px; font-size: 15px; letter-spacing: .2em; }
+    h1 { margin: 0; font-size: clamp(56px, 11vw, 128px); line-height: 1.2; font-weight: 600; letter-spacing: -.04em; }
+    .detail { margin: 24px 0 0; font-size: clamp(16px, 2.5vw, 22px); }
+    footer { font-size: 14px; }
+    button { font: inherit; color: inherit; background: transparent; border: 1px solid currentColor; border-radius: 100px; padding: 12px 22px; cursor: pointer; }
+    button:hover { background: #ffffff25; }
+    button:focus-visible { outline: 3px solid currentColor; outline-offset: 5px; }
+    body[data-state="touch"] { color: #fff; background: #e53136; }
+    body[data-state="touch"] #screen { background: #e53136; animation: contact-flash 1s steps(1, end) infinite; }
+    body[data-state="offline"] .connection { font-weight: 600; }
+    @keyframes contact-flash { 0%, 100% { background: #e53136; } 50% { background: #870c23; } }
+    @media (prefers-reduced-motion: reduce) { body[data-state="touch"] #screen { animation: none; } }
+    @media (max-width: 440px) { header { align-items: flex-start; } .connection { max-width: 160px; } footer { align-items: flex-end; } }
+  </style>
+</head>
+<body data-state="offline">
+  <div id="screen">
+    <header>
+      <span>铁丝迷宫</span>
+      <span class="connection"><span class="dot" aria-hidden="true"></span><span id="connection">正在连接开发板</span></span>
+    </header>
+    <main aria-live="polite" aria-atomic="true">
+      <p class="label" id="label">接触检测</p>
+      <h1 id="title">等待连接</h1>
+      <p class="detail" id="detail">请保持开发板通过 USB 连接电脑</p>
+    </main>
+    <footer>
+      <span>接触变红 · 分开变绿</span>
+      <button id="fullscreen" type="button">进入全屏 ↗</button>
+    </footer>
+  </div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

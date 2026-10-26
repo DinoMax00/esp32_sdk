@@ -1,0 +1,15 @@
+# Local Python environments and generated files
+.venv/
+.venv-*/
+venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# Device-specific data: never upload an existing device's flash contents
+maze-detector/backups/
+maze-detector/logs/
+maze-detector/firmware/
+
+# Original local exports; repository illustrations live in docs/images/
+output/

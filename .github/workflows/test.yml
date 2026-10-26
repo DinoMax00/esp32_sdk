@@ -1,0 +1,26 @@
+name: Test
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  detector:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Firmware debounce
+        run: python maze-detector/test_firmware.py
+      - name: Serial and HTTP integration
+        run: python maze-detector/test_web_server.py
+      - name: Frontend states
+        run: node --test maze-detector/web/state.test.mjs
+      - name: Installer backup and verification
+        run: python scripts/test_setup_board.py

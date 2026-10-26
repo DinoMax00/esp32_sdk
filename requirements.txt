@@ -1,0 +1,3 @@
+# Required only for installing firmware / uploading code; the web server uses stdlib.
+esptool==4.12.0
+mpremote==1.29.0
